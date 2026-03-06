@@ -15,3 +15,7 @@
 # Email integration (optional)
 # google-api-python-client>=2.0.0  # For Gmail OAuth
 # google-auth-oauthlib>=1.0.0      # For OAuth flow
+
+# Feishu Bot (optional)
+# flask>=2.0.0  # For webhook server
+# requests>=2.25.0  # For Feishu API calls

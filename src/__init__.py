@@ -13,6 +13,13 @@ from .email_connector import (
     create_email_connector,
     list_supported_providers,
 )
+from .feishu_bot import (
+    FeishuBot,
+    FeishuMessage,
+    FeishuConfig,
+    create_feishu_bot,
+    create_config,
+)
 
 __version__ = "1.0.0"
 
@@ -30,4 +37,9 @@ __all__ = [
     "EmailAccount",
     "create_email_connector",
     "list_supported_providers",
+    "FeishuBot",
+    "FeishuMessage",
+    "FeishuConfig",
+    "create_feishu_bot",
+    "create_config",
 ]
