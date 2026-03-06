@@ -458,10 +458,32 @@ class Brain:
         logger.info(f"Ingested fragment {fragment.id} with {len(fragment.chunks)} chunks")
         return fragment.id
     
-    def ingest_email(self, subject: str, body: str,
-                    email_id: str, sender: str, recipients: List[str],
-                    timestamp: datetime, labels: List[str] = None) -> str:
-        """Ingest an email"""
+    def ingest_email(self, subject: str = None, body: str = None,
+                    email_id: str = None, sender: str = None, recipients: List[str] = None,
+                    timestamp: datetime = None, labels: List[str] = None,
+                    # New: accept EmailMessage object directly
+                    email_message: Any = None) -> str:
+        """Ingest an email
+        
+        Can be called with either:
+        - Individual parameters: ingest_email(subject, body, email_id, sender, ...)
+        - EmailMessage object: ingest_email(email_message=email_msg)
+        """
+        # Support EmailMessage object from email_connector
+        if email_message is not None:
+            subject = email_message.subject
+            body = email_message.body_text or email_message.body_html or ""
+            email_id = email_message.message_id
+            sender = email_message.from_
+            recipients = [email_message.to] if email_message.to else []
+            timestamp = email_message.date or datetime.now()
+            labels = email_message.labels
+        
+        # Defaults
+        subject = subject or "(No Subject)"
+        body = body or ""
+        email_id = email_id or str(uuid.uuid4())
+        timestamp = timestamp or datetime.now()
         # Create chunks
         chunks = self.chunker.chunk_email(subject, body, email_id, timestamp)
         

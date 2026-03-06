@@ -11,3 +11,7 @@
 # numpy>=1.21.0  # For embeddings
 # sqlalchemy>=2.0  # For complex queries
 # pillow>=10.0  # For image processing
+
+# Email integration (optional)
+# google-api-python-client>=2.0.0  # For Gmail OAuth
+# google-auth-oauthlib>=1.0.0      # For OAuth flow
